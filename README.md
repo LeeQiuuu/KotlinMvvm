@@ -97,7 +97,7 @@ Fragment同！
 
 该框架已应用到自己公司项目中，运行良好，如果后续发现有坑的地方，会及时更新！
 
-## 2020.06.05：
+
 接口调用流程简化，新增接口只需要在ApiService中添加后，即可直接在ViewModel中通过httpUtil调用，一步到位！
 
 另附上文件上传案例代码，需要时以作参考：
@@ -128,7 +128,7 @@ ApiService:
         @POST("/upload")
         suspend fun upLoadFile(@PartMap map: HashMap<String, RequestBody>): BaseResult<UploadModel>
         
-## 2020.06.15
+
 
 在使用viewpager+fragment过程中发现，某些机型应用在按返回键退出时，fragment中的contentView未销毁：
 
@@ -145,7 +145,7 @@ ApiService:
         contentView = null
     }
     
-## 2020.08.31
+
 
 关于BaseAdapter，这里解释下原来的说明，为什么recycleview高度要设置为wrap？
 
@@ -156,7 +156,7 @@ ApiService:
             RecyclerView.LayoutParams.WRAP_CONTENT
         )
 
-## 2020.9.23 简化Adapter
+
 
 子Adapter继承BaseAdapter，不需要再强转ViewBinding了：
 
