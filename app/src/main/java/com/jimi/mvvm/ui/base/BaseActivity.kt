@@ -19,6 +19,10 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.lang.reflect.ParameterizedType
 
+/**
+ *Created by LeeQiuuu on 2021/4/23.
+ *Describe:Activity基础类
+ */
 
 abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatActivity() {
     lateinit var mContext: FragmentActivity
@@ -30,13 +34,12 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
     @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initResources()
 
-        //注意 type.actualTypeArguments[0]=BaseViewModel，type.actualTypeArguments[1]=ViewBinding
+        //获取viewModel实例
         val type = javaClass.genericSuperclass as ParameterizedType
         val clazz1 = type.actualTypeArguments[0] as Class<VM>
         vm = ViewModelProvider(this).get(clazz1)
-
+       //获取viewbinding实例
         val clazz2 = type.actualTypeArguments[1] as Class<VB>
         val method = clazz2.getMethod("inflate", LayoutInflater::class.java)
         v = method.invoke(null, layoutInflater) as VB
@@ -52,18 +55,6 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
         LogUtil.e(getClassName());
     }
 
-    /**
-     * 防止系统字体影响到app的字体
-     *
-     * @return
-     */
-    open fun initResources(): Resources? {
-        val res: Resources = super.getResources()
-        val config = Configuration()
-        config.setToDefaults()
-        res.updateConfiguration(config, res.displayMetrics)
-        return res
-    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -11,7 +11,6 @@ import com.jimi.mvvm.databinding.ActivitySplashBinding
 import com.jimi.mvvm.ui.base.BaseActivity
 import com.jimi.mvvm.ui.base.BaseViewModel
 import com.jimi.mvvm.ui.main.MainActivity
-import com.jimi.mvvm.utils.StatusBarUtil
 import com.jimi.mvvm.utils.SysUtils
 
 
@@ -19,8 +18,6 @@ class SplashActivity : BaseActivity<BaseViewModel, ActivitySplashBinding>() {
 
 
     override fun initView() {
-        StatusBarUtil.immersive(this)
-        StatusBarUtil.darkMode(this)
         if (!this.isTaskRoot) {
             val mainIntent = intent
             val action = mainIntent.action
